@@ -1,0 +1,399 @@
+\documentclass[hyperref={breaklinks,colorlinks,
+   urlcolor=blue,citecolor=blue,linkcolor=red}]{beamer}
+   \setbeamercolor{section in head/foot}{bg=black}
+   
+%\hypersetup{colorlinks=true, allcolors=blue}
+%\addtobeamertemplate{headline}{\hypersetup{linkcolor=white}}{}
+%\addtobeamertemplate{footline}{\hypersetup{linkcolor=white}}{}
+
+  
+%\definecolor{links}{HTML}{452dd2}   
+%\hypersetup{colorlinks,linkcolor=,urlcolor=links}
+
+%\documentclass[hyperref={breaklinks,colorlinks,
+   %urlcolor=blue,citecolor=blue,linkcolor=blue}]{beamer}
+
+\definecolor{GUblue}{RGB}{0, 0, 140} %b204,b153
+\usecolortheme[named=GUblue]{structure}
+
+% For table of content
+\iffalse
+\AtBeginSection[]
+{
+   \begin{frame}
+      \addtocounter{framenumber}{-1}
+      \frametitle{Table of Contents}
+      \tableofcontents[currentsection]
+   \end{frame}
+}
+\fi
+
+\mode<presentation>
+{
+  \usetheme{Ilmenau} %Madrid, AnnArbor, Goettingen, Warsaw,CambridgeUS
+  %\usecolortheme{whale} %whale, beaver,rose,crane, wolverine
+  \usefonttheme{serif}
+  
+} 
+
+\iffalse
+\setbeamertemplate{footline}{%
+    \ifnum\insertcontinuationcount>0
+        \addtocounter{framenumber}{-1}
+    \fi
+    \insertframenumber/\inserttotalframenumber
+}
+\fi
+
+\setbeamertemplate{frametitle continuation}{}
+
+\newcommand{\backupbegin}{
+   \newcounter{finalframe}
+   \setcounter{finalframe}{\value{framenumber}}
+}
+\newcommand{\backupend}{
+   \setcounter{framenumber}{\value{finalframe}}
+}
+
+%\usepackage{apacite}
+\usepackage[round]{natbib}
+
+%\usepackage[colorlinks=true,linkcolor=blue]{hyperref}
+%\usepackage{cite}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage[english]{babel}
+\usepackage[absolute,overlay]{textpos}
+\usepackage{caption}
+%\captionsetup{labelformat=empty,labelsep=none}
+%\captionsetup{format=hang}
+\captionsetup{font=scriptsize}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\usepackage{tipa}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{adjustbox}
+\usepackage{setspace}
+\usepackage{lipsum}
+\usepackage{physics}
+%\usepackage{enumitem}
+%\usepackage{hyperref}
+%\hypersetup{colorlinks,
+%citecolor=blue,linkcolor=black, urlcolor=blue
+%}
+\usepackage{qrcode}
+\renewcommand{\vec}[1]{\boldsymbol{#1}}
+\newcommand{\Hmns}{\tiny\textrm{H}}
+\usepackage{media9}
+\usepackage{aasmacros}
+\usepackage{multimedia}
+\usepackage{sidecap}
+\usepackage{tikz}
+\usetikzlibrary{arrows,positioning}
+
+%\usepackage{ragged2e}    
+%\setbeamertemplate{caption}{\raggedright\centering\insertcaption\par}
+\setbeamertemplate{caption}[numbered]{\centering\raggedright}
+
+\iffalse
+\setbeamerfont{bibliography item}{size=\scriptsize}
+\setbeamerfont{bibliography entry author}{size=\scriptsize}
+\setbeamerfont{bibliography entry title}{size=\scriptsize}
+\setbeamerfont{bibliography entry location}{size=\scriptsize}
+\setbeamerfont{bibliography entry note}{size=\scriptsize}
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+\fi
+
+\newcommand\FourQuad[4]{%
+    \begin{minipage}[b][.35\textheight][t]{.47\textwidth}#1\end{minipage}\hfill%
+    \begin{minipage}[b][.35\textheight][t]{.47\textwidth}#2\end{minipage}\\[0.5em]
+    \begin{minipage}[b][.35\textheight][t]{.47\textwidth}#3\end{minipage}\hfill
+    \begin{minipage}[b][.35\textheight][t]{.47\textwidth}#4\end{minipage}%
+}
+
+
+\usepackage{xspace}
+\newcommand{\bilby}{{\sc Bilby}\xspace}
+\newcommand{\PyCBC}{{\sc PyCBC}\xspace}
+\newcommand{\IPython}{{\sc IPython}\xspace}
+\newcommand{\Python}{{\sc Python}\xspace}
+\newcommand{\Numpy}{{\sc NumPy}\xspace}
+\newcommand{\astropy}{{\sc Astropy}\xspace}
+\newcommand{\gwpy}{{\sc GWpy}\xspace}
+\newcommand{\lal}{{\sc LALSimulation}\xspace}
+
+%\usepackage{hyperref}
+%\usepackage[breaklinks,colorlinks,
+   %urlcolor=blue,citecolor=blue,linkcolor=blue]{hyperref}
+
+
+\usepackage{etoolbox}
+
+\makeatletter
+
+% Patch case where name and year are separated by aysep
+\patchcmd{\NAT@citex}
+  {\@citea\NAT@hyper@{%
+     \NAT@nmfmt{\NAT@nm}%
+     \hyper@natlinkbreak{\NAT@aysep\NAT@spacechar}{\@citeb\@extra@b@citeb}%
+     \NAT@date}}
+  {\@citea\NAT@nmfmt{\NAT@nm}%
+   \NAT@aysep\NAT@spacechar\NAT@hyper@{\NAT@date}}{}{}
+
+% Patch case where name and year are separated by opening bracket
+\patchcmd{\NAT@citex}
+  {\@citea\NAT@hyper@{%
+     \NAT@nmfmt{\NAT@nm}%
+     \hyper@natlinkbreak{\NAT@spacechar\NAT@@open\if*#1*\else#1\NAT@spacechar\fi}%
+       {\@citeb\@extra@b@citeb}%
+     \NAT@date}}
+  {\@citea\NAT@nmfmt{\NAT@nm}%
+   \NAT@spacechar\NAT@@open\if*#1*\else#1\NAT@spacechar\fi\NAT@hyper@{\NAT@date}}
+  {}{}
+
+\makeatother
+
+\defbeamertemplate*{footline}{myminiframes theme}
+  {%
+    \begin{beamercolorbox}[colsep=1.5pt]{upper separation line foot}
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
+      leftskip=.3cm,rightskip=.3cm plus1fil]{author in head/foot}%
+      \leavevmode{\usebeamerfont{author in head/foot}\insertshortauthor}%
+      \hfill%
+      {\usebeamerfont{institute in head/foot}\usebeamercolor[fg]{institute in head/foot}\insertshortinstitute}%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
+      leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+      {\usebeamerfont{title in head/foot}\insertshorttitle\hfill \insertframenumber/\inserttotalframenumber}%<-here
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[colsep=1.5pt]{lower separation line foot}
+    \end{beamercolorbox}
+  }
+\makeatother
+
+\addtobeamertemplate{headline}{\hypersetup{linkcolor=.}}{}
+\addtobeamertemplate{footline}{\hypersetup{linkcolor=.}}{}
+
+\title[Public Health Scotland Information Analyst Interview]
+{Hospital Admissions for Patients Aged 65 and Over in Scotland}
+%\subtitle{Week 10}
+\author[Gerald Leung]{Yee Him Gerald Leung} %\\ Supervisor: Ik Siong Heng\inst{1}}
+%\institute[University of Glasgow]{\inst{1}School of Physics and Astronomy,\\ University of Glasgow}
+\date[]{\today}
+%\logo{\includegraphics[width=2.2cm]{emblem.jpg}}
+%\titlegraphic{\includegraphics[scale=0.055]{emblem.jpg}}
+
+
+%\logo{\includegraphics[scale=0.8]{SchPhyAst_colour.png}}
+
+\begin{document}
+
+
+\begin{frame}
+\titlepage
+%\vspace{-2cm}
+%\begin{center}
+%\includegraphics[width=0.40\textwidth]{SchPhyAst_colour.png}\includegraphics[width=0.30\textwidth]{cu_logo_4c_centre-eps-converted-to.pdf}
+%\end{center}
+\end{frame}
+
+\iffalse
+\begin{frame}[fragile]{Binder Link}
+Binder link: \url{https://mybinder.org/v2/gh/GeraldLYH/XEMRBs-Data/master} \\
+GetSNR.py: classes for LISA curve and SNR calculations \\
+test$\_$getsnr.py: testing GetSNR.py \\
+\iffalse
+\\
+To run, open terminal and do 
+\begin{verbatim}
+python new_testing_start.py
+\end{verbatim}
+\fi
+\end{frame}
+\fi
+
+
+
+\section{Introduction}
+
+\begin{frame}{Background}
+\begin{itemize}
+\item{Admission datasets collated from 2009/10 to 2018/19}
+\item{Patients aged 65 or above}
+\item{Causes for admissions were all alcohol related conditions}
+\item{Divided into number of stays, unique patients and new patients}
+\item{All data provided by Public Health Scotland}
+\end{itemize}
+\end{frame}
+
+\section{Hospitalisation Rates for Aged 65 or Above}
+\begin{frame}{Combined Statistics}
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.55]{total}
+\caption{All admission statistics for patients aged 65 or above. An increasing trend could be observed.}
+\end{center}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}{Stays}
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.55]{stays}
+\caption{Total number of stays.}
+\end{center}
+\end{figure}
+\end{frame}
+
+\iffalse
+\begin{frame}{Hospital Statistics}
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.33]{newpatients}
+%\includegraphics[scale=0.32]{stays}
+\includegraphics[scale=0.33]{patients}
+\caption{Number of patients and new patients.}
+\end{center}
+\end{figure}
+\end{frame}
+\fi
+
+\begin{frame}{Unique Patients and New Patients}
+\begin{columns}
+\begin{column}{0.58\textwidth}
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.38]{patients}
+\caption{Number of patients.}
+\end{center}
+\end{figure}
+\end{column}
+
+
+\begin{column}{0.6\textwidth}
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.38]{newpatients}
+\caption{Number of new patients.}
+\end{center}
+\end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Observations}
+\begin{itemize}
+\item{Increasing trend in general}
+\item{A slight decline from 11/12 to 12/13 but increasing again since then}
+\item{Number of stays, patients and new patients increased by 17.95\%, 17.79\% and 23.34\% respectively}
+\item{The trend may be caused by multiple factors}
+\begin{itemize}
+\item{an ageing population}
+\item{increasing life expectancy}
+\item{improved care for the elderly}
+\item{conversely, easier to suffer from alcoholic effects at an older age}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\section{Scotland Total}
+\begin{frame}{Scotland Total}
+\begin{columns}
+\begin{column}{0.4\textwidth}
+\begin{itemize}
+\item{Total admissions in Scotland}
+\item{A general decline could be observed}
+\end{itemize}
+\end{column}
+
+\begin{column}{0.7\textwidth}
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.45]{scotlandtotal}
+\caption{Combined hospitalisation rates in Scotland.}
+\end{center}
+\end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+
+\section{EASR}
+\begin{frame}{EASR Statistics}
+\begin{columns}
+\begin{column}{0.4\textwidth}
+\begin{itemize}
+\item{European age sex standardised rates}
+\item{Takes into account a changing population}
+\item{A general decline could also be observed}
+\end{itemize}
+\end{column}
+
+\begin{column}{0.7\textwidth}
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.45]{easrtotal}
+\caption{Admissions in terms of EASR}
+\end{center}
+\end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+
+\iffalse
+\section{Gender}
+\begin{frame}{Differences by Gender}
+\begin{columns}
+\begin{column}{0.4\textwidth}
+\begin{itemize}
+\item{More admissions for male comparing to female}
+\item{The ratios fluctuate over the years}
+\end{itemize}
+\end{column}
+
+\begin{column}{0.7\textwidth}
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.45]{genderdiff}
+\caption{Ratio of male admissions to female admissions.}
+\end{center}
+\end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+\fi
+
+\section{Conclusion}
+\begin{frame}{Summary and Conclusion}
+\begin{itemize}
+\item{From 2009/10 to 2018/19, a general upward trend could be observed for number of stays, patients and new patients}
+\item{Caused by factors such as population number in the 65 or above age group, change in life expectancy}
+\item{Using a standard population (EASR), there is a slight declining trend except for the number of new patients}
+\item{On the other hand, the overall trend including all age groups in Scotland also shows a general decline}
+\end{itemize}
+\end{frame}
+
+
+
+
+
+%\iffalse
+%\begin{frame}[allowframebreaks]{References} 
+
+%\bibliographystyle{unsrt}
+%\bibliographystyle{apalike}
+
+%\bibliographystyle{aasjournal}
+
+%\bibliographstyle{aa_url}
+\bibliographystyle{yahapj}
+
+\bibliography{slidescites}
+%\end{frame}
+%\fi
+
+\end{document}
