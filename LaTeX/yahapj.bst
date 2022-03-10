@@ -1041,6 +1041,31 @@ FUNCTION {article}
   fin.entry
 }
 
+FUNCTION {software}
+{ output.bibitem
+  format.authors "author" output.check
+  author format.key output
+  name.or.dash
+  format.date "year" output.check
+  crossref missing$
+    { format.journal "journal" output.check
+      maybe.doi.link.prepend
+      format.vol.num.pages output
+    }
+    { format.article.crossref
+      maybe.doi.link.prepend
+      output.nonnull
+      format.pages output
+    }
+  if$
+  format.journal.pages
+  maybe.doi.link.end
+  format.eprint output
+  format.note output
+  fin.entry
+}
+
+
 FUNCTION {book}
 { output.bibitem
   author empty$

@@ -2,48 +2,21 @@
    urlcolor=blue,citecolor=blue,linkcolor=red}]{beamer}
    \setbeamercolor{section in head/foot}{bg=black}
    
-%\hypersetup{colorlinks=true, allcolors=blue}
-%\addtobeamertemplate{headline}{\hypersetup{linkcolor=white}}{}
-%\addtobeamertemplate{footline}{\hypersetup{linkcolor=white}}{}
-
-  
-%\definecolor{links}{HTML}{452dd2}   
-%\hypersetup{colorlinks,linkcolor=,urlcolor=links}
-
-%\documentclass[hyperref={breaklinks,colorlinks,
-   %urlcolor=blue,citecolor=blue,linkcolor=blue}]{beamer}
 
 \definecolor{GUblue}{RGB}{0, 0, 140} %b204,b153
+\definecolor{mayablue}{rgb}{0.45, 0.76, 0.98}
+\definecolor{lightcornflowerblue}{rgb}{0.6, 0.81, 0.93}
 \usecolortheme[named=GUblue]{structure}
 
-% For table of content
-\iffalse
-\AtBeginSection[]
-{
-   \begin{frame}
-      \addtocounter{framenumber}{-1}
-      \frametitle{Table of Contents}
-      \tableofcontents[currentsection]
-   \end{frame}
-}
-\fi
 
 \mode<presentation>
 {
   \usetheme{Ilmenau} %Madrid, AnnArbor, Goettingen, Warsaw,CambridgeUS
-  %\usecolortheme{whale} %whale, beaver,rose,crane, wolverine
+  %\usecolortheme{seahorse} %whale, beaver,rose,crane, wolverine
   \usefonttheme{serif}
   
 } 
 
-\iffalse
-\setbeamertemplate{footline}{%
-    \ifnum\insertcontinuationcount>0
-        \addtocounter{framenumber}{-1}
-    \fi
-    \insertframenumber/\inserttotalframenumber
-}
-\fi
 
 \setbeamertemplate{frametitle continuation}{}
 
@@ -55,19 +28,13 @@
    \setcounter{framenumber}{\value{finalframe}}
 }
 
-%\usepackage{apacite}
 \usepackage[round]{natbib}
-
-%\usepackage[colorlinks=true,linkcolor=blue]{hyperref}
-%\usepackage{cite}
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{verbatim}
 \usepackage[english]{babel}
 \usepackage[absolute,overlay]{textpos}
 \usepackage{caption}
-%\captionsetup{labelformat=empty,labelsep=none}
-%\captionsetup{format=hang}
 \captionsetup{font=scriptsize}
 \usepackage{amssymb}
 \usepackage{tcolorbox}
@@ -78,11 +45,6 @@
 \usepackage{setspace}
 \usepackage{lipsum}
 \usepackage{physics}
-%\usepackage{enumitem}
-%\usepackage{hyperref}
-%\hypersetup{colorlinks,
-%citecolor=blue,linkcolor=black, urlcolor=blue
-%}
 \usepackage{qrcode}
 \renewcommand{\vec}[1]{\boldsymbol{#1}}
 \newcommand{\Hmns}{\tiny\textrm{H}}
@@ -93,18 +55,8 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows,positioning}
 
-%\usepackage{ragged2e}    
-%\setbeamertemplate{caption}{\raggedright\centering\insertcaption\par}
 \setbeamertemplate{caption}[numbered]{\centering\raggedright}
 
-\iffalse
-\setbeamerfont{bibliography item}{size=\scriptsize}
-\setbeamerfont{bibliography entry author}{size=\scriptsize}
-\setbeamerfont{bibliography entry title}{size=\scriptsize}
-\setbeamerfont{bibliography entry location}{size=\scriptsize}
-\setbeamerfont{bibliography entry note}{size=\scriptsize}
-\setbeamertemplate{bibliography item}{\insertbiblabel}
-\fi
 
 \newcommand\FourQuad[4]{%
     \begin{minipage}[b][.35\textheight][t]{.47\textwidth}#1\end{minipage}\hfill%
@@ -124,9 +76,6 @@
 \newcommand{\gwpy}{{\sc GWpy}\xspace}
 \newcommand{\lal}{{\sc LALSimulation}\xspace}
 
-%\usepackage{hyperref}
-%\usepackage[breaklinks,colorlinks,
-   %urlcolor=blue,citecolor=blue,linkcolor=blue]{hyperref}
 
 
 \usepackage{etoolbox}
@@ -177,12 +126,12 @@
 \addtobeamertemplate{headline}{\hypersetup{linkcolor=.}}{}
 \addtobeamertemplate{footline}{\hypersetup{linkcolor=.}}{}
 
-\title[Public Health Scotland Information Analyst Interview]
-{Hospital Admissions for Patients Aged 65 and Over in Scotland}
-%\subtitle{Week 10}
-\author[Gerald Leung]{Yee Him Gerald Leung} %\\ Supervisor: Ik Siong Heng\inst{1}}
-%\institute[University of Glasgow]{\inst{1}School of Physics and Astronomy,\\ University of Glasgow}
-\date[]{\today}
+\title[Hierarchical Geography]
+{Hierarchical Geography with \Python}
+\subtitle{A Very Brief Introduction}
+\author[Gerald Leung]{Gerald Leung\inst{1}} %\\ Supervisor: Ik Siong Heng\inst{1}}
+\institute[PHS Geospatial]{\inst{1}Public Health Scotland}%{\inst{1}School of Physics and Astronomy,\\ University of Glasgow}
+\date[\today]{\today}
 %\logo{\includegraphics[width=2.2cm]{emblem.jpg}}
 %\titlegraphic{\includegraphics[scale=0.055]{emblem.jpg}}
 
@@ -200,20 +149,6 @@
 %\end{center}
 \end{frame}
 
-\iffalse
-\begin{frame}[fragile]{Binder Link}
-Binder link: \url{https://mybinder.org/v2/gh/GeraldLYH/XEMRBs-Data/master} \\
-GetSNR.py: classes for LISA curve and SNR calculations \\
-test$\_$getsnr.py: testing GetSNR.py \\
-\iffalse
-\\
-To run, open terminal and do 
-\begin{verbatim}
-python new_testing_start.py
-\end{verbatim}
-\fi
-\end{frame}
-\fi
 
 
 
@@ -221,87 +156,74 @@ python new_testing_start.py
 
 \begin{frame}{Background}
 \begin{itemize}
-\item{Admission datasets collated from 2009/10 to 2018/19}
-\item{Patients aged 65 or above}
-\item{Causes for admissions were all alcohol related conditions}
-\item{Divided into number of stays, unique patients and new patients}
-\item{All data provided by Public Health Scotland}
-\end{itemize}
-\end{frame}
-
-\section{Hospitalisation Rates for Aged 65 or Above}
-\begin{frame}{Combined Statistics}
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.55]{total}
-\caption{All admission statistics for patients aged 65 or above. An increasing trend could be observed.}
-\end{center}
-\end{figure}
-\end{frame}
-
-
-\begin{frame}{Stays}
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.55]{stays}
-\caption{Total number of stays.}
-\end{center}
-\end{figure}
-\end{frame}
-
-\iffalse
-\begin{frame}{Hospital Statistics}
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.33]{newpatients}
-%\includegraphics[scale=0.32]{stays}
-\includegraphics[scale=0.33]{patients}
-\caption{Number of patients and new patients.}
-\end{center}
-\end{figure}
-\end{frame}
-\fi
-
-\begin{frame}{Unique Patients and New Patients}
-\begin{columns}
-\begin{column}{0.58\textwidth}
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.38]{patients}
-\caption{Number of patients.}
-\end{center}
-\end{figure}
-\end{column}
-
-
-\begin{column}{0.6\textwidth}
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.38]{newpatients}
-\caption{Number of new patients.}
-\end{center}
-\end{figure}
-\end{column}
-\end{columns}
-\end{frame}
-
-\begin{frame}{Observations}
+\item{We use GP boundaries as an example}
 \begin{itemize}
-\item{Increasing trend in general}
-\item{A slight decline from 11/12 to 12/13 but increasing again since then}
-\item{Number of stays, patients and new patients increased by 17.95\%, 17.79\% and 23.34\% respectively}
-\item{The trend may be caused by multiple factors}
+\item{areas covered are defined with different geographies}
+\item{e.g. postcode districts and sectors}
+\item{ultimately we are only interested in the overall boundary of a GP}
+\end{itemize}
+\item{How do we merge geographies at different levels?}
+$\Longrightarrow \textrm{\texttt{GeoPandas} in \Python}$
+\end{itemize}
+\end{frame}
+
+\section{\texttt{GeoPandas}}
+\begin{frame}{\texttt{GeoPandas}}
 \begin{itemize}
-\item{an ageing population}
-\item{increasing life expectancy}
-\item{improved care for the elderly}
-\item{conversely, easier to suffer from alcoholic effects at an older age}
+\item{An open source project for geospatial data analysis in \Python~\citep{kelsey_jordahl_2020_3946761}}
+\item{Extends from \texttt{Pandas}~\citep{pandas},
+a data analysis package}
+\item{Can be used to read and create shape files}
+\end{itemize}
+%\begin{figure}
+%\begin{center}
+%\includegraphics[scale=0.55]{total}
+%\caption{All admission statistics for patients aged 65 or above. An increasing trend could be observed.}
+%\end{center}
+%\end{figure}
+\end{frame}
+
+\section{Data}
+\begin{frame}{NRS Data}
+We make use of postcode district
+and sector data from the National Records of Scotland (\href{https://www.nrscotland.gov.uk/statistics-and-data/geography/nrs-postcode-extract}{NRS}).
+\begin{itemize}
+\item{Shape files}
+\item{Contain geometries of districts and sectors}
+\item{Read in as \texttt{DataFrames} into \Python with
+\texttt{Pandas}}
+\item{Convert to \texttt{GeoDataFrames} with \texttt{GeoPandas}}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{NRS Data}
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.5]{districtcolumns}
+\caption{A segment of \texttt{DataFrame} containing district information. Similarly for sector data, with a column
+representing postcode sectors.}
+\end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}{GP Data}
+\begin{itemize}
+\item{For this example we make use of a few GPs from Lanarkshire (with some modifications):}
+\begin{itemize}
+\item{Nalagatla Medical Practice}
+\item{The Craigallian Avenue Practice}
+\item{The Stonelaw Practice}
+\item{Ardoch Medical Practice}
+\end{itemize}
+\item{For the purpose of testing, we also create two hypothetical practices, namely Hypothetical One and Hypothetical Two respectively}
+\begin{itemize}
+\item{They cover areas defined by a combination of districts and sectors}
 \end{itemize}
 \end{itemize}
 \end{frame}
 
 
-\section{Scotland Total}
+
 \begin{frame}{Scotland Total}
 \begin{columns}
 \begin{column}{0.4\textwidth}
@@ -312,60 +234,16 @@ python new_testing_start.py
 \end{column}
 
 \begin{column}{0.7\textwidth}
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.45]{scotlandtotal}
-\caption{Combined hospitalisation rates in Scotland.}
-\end{center}
-\end{figure}
+%\begin{figure}
+%\begin{center}
+%\includegraphics[scale=0.45]{scotlandtotal}
+%\caption{Combined hospitalisation rates in Scotland.}
+%\end{center}
+%\end{figure}
 \end{column}
 \end{columns}
 \end{frame}
 
-\section{EASR}
-\begin{frame}{EASR Statistics}
-\begin{columns}
-\begin{column}{0.4\textwidth}
-\begin{itemize}
-\item{European age sex standardised rates}
-\item{Takes into account a changing population}
-\item{A general decline could also be observed}
-\end{itemize}
-\end{column}
-
-\begin{column}{0.7\textwidth}
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.45]{easrtotal}
-\caption{Admissions in terms of EASR}
-\end{center}
-\end{figure}
-\end{column}
-\end{columns}
-\end{frame}
-
-\iffalse
-\section{Gender}
-\begin{frame}{Differences by Gender}
-\begin{columns}
-\begin{column}{0.4\textwidth}
-\begin{itemize}
-\item{More admissions for male comparing to female}
-\item{The ratios fluctuate over the years}
-\end{itemize}
-\end{column}
-
-\begin{column}{0.7\textwidth}
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.45]{genderdiff}
-\caption{Ratio of male admissions to female admissions.}
-\end{center}
-\end{figure}
-\end{column}
-\end{columns}
-\end{frame}
-\fi
 
 \section{Conclusion}
 \begin{frame}{Summary and Conclusion}
@@ -382,7 +260,7 @@ python new_testing_start.py
 
 
 %\iffalse
-%\begin{frame}[allowframebreaks]{References} 
+\begin{frame}[allowframebreaks]{References} 
 
 %\bibliographystyle{unsrt}
 %\bibliographystyle{apalike}
@@ -393,7 +271,7 @@ python new_testing_start.py
 \bibliographystyle{yahapj}
 
 \bibliography{slidescites}
-%\end{frame}
+\end{frame}
 %\fi
 
 \end{document}
